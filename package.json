@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/jmblack15/My-Todo-List-Server#readme",
   "dependencies": {
+    "@prisma/client": "^6.19.0",
     "express": "^5.1.0",
     "http-status-codes": "^2.3.0",
     "joi": "^18.0.1"
+  },
+  "devDependencies": {
+    "prisma": "^6.19.0"
   }
 }
