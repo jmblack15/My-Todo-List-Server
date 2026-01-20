@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: MyTodo_List_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
+
+  app:
+    build: .
+    container_name: node_backend
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?schema=public
+    volumes:
+      - .:/app
+      - /app/node_modules # Evita que los nodos locales sobrescriban los del contenedor
+    depends_on:
+      - db
